@@ -35,3 +35,39 @@ END;
 $$;
 
 
+--Exercicio 1.3
+
+--Bloco Anônimo do Exercicio 1.1 - fn_consultar_saldo 
+DO
+$$
+DECLARE
+    v_cod_cliente INT := 1;
+    v_cod_conta INT := 2;
+    v_saldo NUMERIC(10, 2);
+BEGIN
+    SELECT fn_consultar_saldo(v_cod_cliente, v_cod_conta) INTO v_saldo;
+    RAISE NOTICE '%', v_saldo;
+END;
+$$;
+
+
+--Bloco Anônimo do Exercicio 1.2 - fn_transferir
+DO
+$$
+DECLARE
+    v_cod_cliente_remetente INT := 1;
+    v_cod_conta_remetente INT := 2;
+    v_cod_cliente_destinatario INT := 2;
+    v_cod_conta_destinatario INT := 1;
+    v_valor_transferencia NUMERIC(10, 2) := 10.00;
+    v_transferencia_finalizada BOOLEAN;
+BEGIN
+    SELECT fn_transferir(v_cod_cliente_remetente, v_cod_conta_remetente, v_cod_cliente_destinatario, v_cod_conta_destinatario, v_valor_transferencia) INTO v_transferencia_finalizada;
+    IF v_transferencia_finalizada THEN
+        RAISE NOTICE 'Transferência ocorreu';
+    ELSE
+        RAISE NOTICE 'Transferência não ocorreu';
+    END IF;
+END;
+$$;
+
